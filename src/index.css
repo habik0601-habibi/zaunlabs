@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Skill fix: override Spline's body overflow injection (COMMON_PROBLEMS.md §1) ── */
+body {
+  overflow: auto !important;
+}
+
+/* ── Kill "Built with Spline" badge — all three COMMON_PROBLEMS.md techniques ── */
+/* Technique 3: CSS belt-and-suspenders */
+a[href*="spline.design"],
+a[href*="spline.design"] *,
+div[id*="spline-logo"],
+div[id*="logo-on-spline"],
+[class*="spline-watermark"],
+[class*="SplineWatermark"],
+[id*="SplineLogo"],
+canvas + a,
+canvas ~ a {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Global site background matches Spline scene: blue-sky-to-white */
+  body {
+    background-color: #D6ECFF;
+    color: #0D2851;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+/* =====================================================
+   GLASS CARDS — layered translucent over Spline-blue bg
+   ===================================================== */
+.glass-card {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(74, 144, 217, 0.25);
+  box-shadow: 0 8px 32px -8px rgba(26, 74, 138, 0.15);
+}
+
+.glass-card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-hover:hover {
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(74, 144, 217, 0.5);
+  box-shadow: 0 16px 48px -8px rgba(26, 74, 138, 0.25);
+  transform: translateY(-3px);
+}
+
+/* Dark glass — for footer / CTA sections */
+.dark-glass {
+  background: rgba(13, 40, 81, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(74, 144, 217, 0.25);
+}
+
+/* =====================================================
+   GRADIENT TEXT UTILITIES
+   ===================================================== */
+.gradient-text-blue {
+  background: linear-gradient(135deg, #1A4A8A 0%, #4A90D9 50%, #10B981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-emerald {
+  background: linear-gradient(135deg, #005F33 0%, #10B981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* =====================================================
+   SCROLLBAR (subtle blue)
+   ===================================================== */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #D6ECFF; }
+::-webkit-scrollbar-thumb {
+  background: #4A90D9;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: #1A4A8A; }
+
+/* =====================================================
+   SPLINE CANVAS — fills container, pointer-events none
+   to allow scroll through the scene
+   ===================================================== */
+.spline-canvas canvas {
+  outline: none !important;
+}
