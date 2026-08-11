@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Process from './components/Process'
 import Testimonials from './components/Testimonials'
+import { SocialConnect } from './components/ui/connect-with-us'
 import About from './components/About'
 import Services from './components/Services'
 import Contact from './components/Contact'
@@ -24,6 +25,9 @@ export default function App() {
 
         {/* 3. TESTIMONIALS / WHAT OUR CLIENTS SAY */}
         <Testimonials />
+
+        {/* 3.5. SOCIAL CONNECT */}
+        <SocialConnect />
 
         {/* 4. ABOUT */}
         <About />
