@@ -4,7 +4,8 @@ import Hero from './components/Hero'
 import Process from './components/Process'
 import Testimonials from './components/Testimonials'
 import { SocialConnect } from './components/ui/connect-with-us'
-import AboutServicesScrollSection from './components/ui/about-services-scroll-section'
+import About from './components/About'
+import Services from './components/Services'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 
@@ -25,13 +26,16 @@ export default function App() {
         {/* 3. TESTIMONIALS / WHAT OUR CLIENTS SAY */}
         <Testimonials />
 
-        {/* 3.5 SOCIAL CONNECT */}
+        {/* 3.5. SOCIAL CONNECT */}
         <SocialConnect />
 
-        {/* 4. ABOUT + SERVICES — Three.js scroll narrative (replaces static About & Services) */}
-        <AboutServicesScrollSection />
+        {/* 4. ABOUT */}
+        <About />
 
-        {/* 5. CONTACT */}
+        {/* 5. SERVICES */}
+        <Services />
+
+        {/* 6. CONTACT */}
         <Contact />
       </main>
 
