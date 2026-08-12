@@ -1,5 +1,6 @@
 import React from 'react'
 import { Code2, Bot, CheckCircle2, ArrowUpRight, Sparkles } from 'lucide-react'
+import { BorderBeamPanel } from './ui/border-beam-panel'
 
 export default function Services() {
   const services = [
@@ -62,11 +63,21 @@ export default function Services() {
         <div className="grid md:grid-cols-2 gap-8 lg:gap-10">
           {services.map((service) => {
             const Icon = service.icon
+            // Blue hues for Web Dev, teal/emerald hues for AI Automation
+            const beamColors = service.id === 'web-dev' ? [215, 200] : [160, 180]
             return (
-              <div
+              <BorderBeamPanel
                 key={service.id}
-                className={`glass-card glass-card-hover rounded-3xl p-8 md:p-10 border ${service.border}
-                             shadow-xl flex flex-col justify-between group transition-all duration-300`}
+                colors={beamColors}
+                thickness={2}
+                radius={24}
+                durationIdle={3.6}
+                durationActive={1.0}
+                className="shadow-xl"
+              >
+              <div
+                className={`glass-card glass-card-hover rounded-[22px] p-8 md:p-10 border ${service.border}
+                             flex flex-col justify-between group transition-all duration-300 h-full`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
@@ -112,6 +123,7 @@ export default function Services() {
                   </a>
                 </div>
               </div>
+              </BorderBeamPanel>
             )
           })}
         </div>
