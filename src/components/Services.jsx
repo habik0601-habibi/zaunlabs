@@ -69,15 +69,19 @@ export default function Services() {
               <BorderBeamPanel
                 key={service.id}
                 colors={beamColors}
-                thickness={2}
+                thickness={1.2}
                 radius={24}
                 durationIdle={3.6}
                 durationActive={1.0}
                 className="shadow-xl"
               >
               <div
-                className={`glass-card glass-card-hover rounded-[22px] p-8 md:p-10 border ${service.border}
-                             flex flex-col justify-between group transition-all duration-300 h-full`}
+                className={`backdrop-blur-2xl rounded-[22.8px] p-8 md:p-10 border ${service.border}
+                             bg-[#D6ECFF]/20 hover:bg-[#D6ECFF]/35 transition-all duration-300
+                             flex flex-col justify-between group h-full`}
+                style={{
+                  boxShadow: '0 8px 32px -8px rgba(26, 74, 138, 0.08)',
+                }}
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">

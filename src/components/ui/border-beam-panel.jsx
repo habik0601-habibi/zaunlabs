@@ -36,7 +36,7 @@ const MOTIQ_TOKENS = `
 
 // ─── Utility: build a conic-gradient comet stop ───────────────────────────────
 function comet(hue, alpha, pos) {
-  return `color-mix(in srgb, hsl(${hue} 90% 65%) ${Math.round(alpha * 100)}%, transparent) ${pos}%`;
+  return `color-mix(in srgb, hsl(${hue} 100% 75%) ${Math.round(alpha * 100)}%, transparent) ${pos}%`;
 }
 
 // ─── Inner ring (needs @property for animation) ───────────────────────────────
@@ -48,12 +48,14 @@ function BeamRing({ colors, thickness, radius, durationIdle, durationActive, pau
 
   const gradient = [
     `transparent 0%`,
-    comet(hue1, 0.0, 20),
-    comet(hue1, 0.6, 35),
+    comet(hue1, 0.0, 10),
+    comet(hue1, 0.6, 28),
     comet(hue1, 1.0, 42),
-    comet(hue2, 1.0, 48),
-    comet(hue2, 0.6, 55),
-    comet(hue2, 0.0, 70),
+    `color-mix(in srgb, #ffffff, transparent 0%) 46%`, // ultra-bright white core
+    `color-mix(in srgb, #ffffff, transparent 0%) 50%`, // ultra-bright white core
+    comet(hue2, 1.0, 54),
+    comet(hue2, 0.6, 68),
+    comet(hue2, 0.0, 85),
     `transparent 100%`,
   ].join(", ");
 
@@ -110,7 +112,7 @@ export function BorderBeamPanel({
   className,
   // hue values for the two comet colors — defaults to Zaunlabs cobalt blue palette
   colors = [215, 195],
-  thickness = 2,
+  thickness = 1.5,
   radius = 24,
   durationIdle = 3.6,
   durationActive = 1.1,
