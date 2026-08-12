@@ -69,10 +69,10 @@ export default function Services() {
               <BorderBeamPanel
                 key={service.id}
                 colors={beamColors}
-                thickness={1.2}
+                thickness={0.35}
                 radius={24}
-                durationIdle={3.6}
-                durationActive={1.0}
+                durationIdle={9.5}
+                durationActive={3.2}
                 className="shadow-xl"
               >
               <div
