@@ -11,7 +11,7 @@ export default function Services() {
       tagline: 'Modern, ultra-fast websites & web applications built to scale and convert.',
       icon: Code2,
       iconBg: 'bg-gradient-to-br from-blue-600 to-blue-400',
-      border: 'border-blue-200 hover:border-blue-400',
+      border: 'border-blue-200/50',
       deliverables: [
         'Custom Business Websites & Landing Pages (React / Next.js / Tailwind)',
         'Interactive Web Applications, Client Portals & Analytics Dashboards',
@@ -26,7 +26,7 @@ export default function Services() {
       tagline: 'Autonomous AI pipelines & assistants that handle complex business operations 24/7.',
       icon: Bot,
       iconBg: 'bg-gradient-to-br from-emerald-600 to-emerald-400',
-      border: 'border-emerald-200 hover:border-emerald-400',
+      border: 'border-emerald-200/50',
       deliverables: [
         'Custom AI Agents (Lead qualification, customer service, automated research)',
         'Workflow Automation (n8n, Make, Zapier, Python scripts & API webhooks)',
@@ -69,18 +69,20 @@ export default function Services() {
               <BorderBeamPanel
                 key={service.id}
                 colors={beamColors}
-                thickness={0.35}
+                thickness={0.2}
                 radius={24}
                 durationIdle={9.5}
                 durationActive={3.2}
                 className="shadow-xl"
               >
               <div
-                className={`backdrop-blur-2xl rounded-[22.8px] p-8 md:p-10 border ${service.border}
-                             bg-[#D6ECFF]/20 hover:bg-[#D6ECFF]/35 transition-all duration-300
+                className={`backdrop-blur-3xl rounded-[22.8px] p-8 md:p-10 border ${service.border}
+                             bg-gradient-to-br from-[#C3E2FF]/55 to-[#99CFFF]/30 
+                             hover:from-[#C3E2FF]/70 hover:to-[#99CFFF]/45
+                             transition-all duration-300
                              flex flex-col justify-between group h-full`}
                 style={{
-                  boxShadow: '0 8px 32px -8px rgba(26, 74, 138, 0.08)',
+                  boxShadow: '0 12px 40px -8px rgba(26, 74, 138, 0.12), inset 0 1.5px 2px rgba(255, 255, 255, 0.8)',
                 }}
               >
                 <div>

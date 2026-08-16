@@ -36,7 +36,7 @@ const MOTIQ_TOKENS = `
 
 // ─── Utility: build a conic-gradient comet stop ───────────────────────────────
 function comet(hue, alpha, pos) {
-  return `color-mix(in srgb, hsl(${hue} 100% 75%) ${Math.round(alpha * 100)}%, transparent) ${pos}%`;
+  return `color-mix(in srgb, hsl(${hue} 100% 50%) ${Math.round(alpha * 100)}%, transparent) ${pos}%`;
 }
 
 // ─── Inner ring (needs @property for animation) ───────────────────────────────
@@ -48,14 +48,14 @@ function BeamRing({ colors, thickness, radius, durationIdle, durationActive, pau
 
   const gradient = [
     `transparent 0%`,
-    comet(hue1, 0.0, 10),
-    comet(hue1, 0.6, 28),
-    comet(hue1, 1.0, 42),
-    `color-mix(in srgb, #ffffff, transparent 0%) 46%`, // ultra-bright white core
-    `color-mix(in srgb, #ffffff, transparent 0%) 50%`, // ultra-bright white core
-    comet(hue2, 1.0, 54),
-    comet(hue2, 0.6, 68),
-    comet(hue2, 0.0, 85),
+    comet(hue1, 0.0, 45),
+    comet(hue1, 0.7, 47),
+    comet(hue1, 1.0, 49),
+    `color-mix(in srgb, #ffffff, transparent 0%) 49.5%`, // ultra-bright white core
+    `color-mix(in srgb, #ffffff, transparent 0%) 50.5%`, // ultra-bright white core
+    comet(hue2, 1.0, 51),
+    comet(hue2, 0.7, 53),
+    comet(hue2, 0.0, 55),
     `transparent 100%`,
   ].join(", ");
 
@@ -71,6 +71,7 @@ function BeamRing({ colors, thickness, radius, durationIdle, durationActive, pau
     borderRadius: `${radius}px`,
     padding: `${thickness}px`,
     transition: `animation-duration 0.8s cubic-bezier(0.4,0,0.2,1)`,
+    filter: `drop-shadow(0 0 2px hsl(${hue1} 100% 50% / 0.75)) drop-shadow(0 0 4px hsl(${hue2} 100% 50% / 0.5))`,
   };
 
   useEffect(() => {
