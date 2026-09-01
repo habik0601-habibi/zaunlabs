@@ -7,6 +7,7 @@ import { SocialConnect } from './components/ui/connect-with-us'
 import About from './components/About'
 import Services from './components/Services'
 import Contact from './components/Contact'
+import Integrations from './components/Integrations'
 import Footer from './components/Footer'
 
 export default function App() {
@@ -26,17 +27,20 @@ export default function App() {
         {/* 3. TESTIMONIALS / WHAT OUR CLIENTS SAY */}
         <Testimonials />
 
-        {/* 3.5. SOCIAL CONNECT */}
-        <SocialConnect />
-
         {/* 4. ABOUT */}
         <About />
+
+        {/* 4.5. SOCIAL CONNECT */}
+        <SocialConnect />
 
         {/* 5. SERVICES */}
         <Services />
 
         {/* 6. CONTACT */}
         <Contact />
+
+        {/* 7. INTEGRATIONS */}
+        <Integrations />
       </main>
 
       {/* Footer */}

@@ -78,8 +78,8 @@ export const SocialConnect = () => {
   return (
     <section
       id="social"
-      className="relative py-20 md:py-28 overflow-hidden border-t border-blue-100"
-      style={{ background: 'linear-gradient(180deg, #EAF4FF 0%, #F7FBFF 100%)' }}
+      className="relative py-10 md:py-14 overflow-hidden border-t border-blue-100"
+      style={{ background: 'linear-gradient(180deg, #D6ECFF 0%, #E4EFFB 50%, #D6ECFF 100%)' }}
     >
       {/* Subtle radial glow blob in background */}
       <div
@@ -101,15 +101,10 @@ export const SocialConnect = () => {
         </div>
 
         {/* Heading */}
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-blue-950 tracking-tight mb-4">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-blue-950 tracking-tight mb-10">
           Connect{' '}
           <span className="gradient-text-blue">With Us</span>
         </h2>
-
-        {/* Subtitle */}
-        <p className="max-w-xl mx-auto text-blue-800/70 text-base sm:text-lg mb-12 leading-relaxed">
-          Follow us for web drops, AI insights, and behind-the-scenes from the studio.
-        </p>
 
         {/* Glass icon card */}
         <div

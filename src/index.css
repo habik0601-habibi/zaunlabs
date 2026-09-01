@@ -7,25 +7,12 @@ body {
   overflow: auto !important;
 }
 
-/* ── Kill "Built with Spline" badge — all three COMMON_PROBLEMS.md techniques ── */
-/* Technique 3: CSS belt-and-suspenders */
-a[href*="spline.design"],
-a[href*="spline.design"] *,
-div[id*="spline-logo"],
-div[id*="logo-on-spline"],
-[class*="spline-watermark"],
-[class*="SplineWatermark"],
-[id*="SplineLogo"],
-canvas + a,
-canvas ~ a {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  width: 0 !important;
-  height: 0 !important;
-  overflow: hidden !important;
-}
+/*
+  The "Built with Spline" watermark is handled in Hero.jsx, not here.
+  In runtime v1.x it is a WebGL post-processing pass drawn into the canvas
+  framebuffer, not an injected <a> element, so no CSS selector can hide it.
+  See the WATERMARK REMOVAL note in src/components/Hero.jsx.
+*/
 
 @layer base {
   html {

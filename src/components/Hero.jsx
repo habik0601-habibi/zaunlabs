@@ -46,29 +46,37 @@ export default function Hero() {
     window.addEventListener('resize', onResize)
 
     // ─────────────────────────────────────────────────────────────────────
-    // 3. BADGE REMOVAL — skill Fix 1: MutationObserver
-    //    Completely destroys the element every time it appears.
-    //    No cover div — the element is gone from the DOM entirely.
+    // 3. WATERMARK REMOVAL
+    //
+    //    NOTE: the "Built with Spline" badge is NOT a DOM element in runtime
+    //    v1.x — it is a post-processing pass (`logoOverlayPass`) composited
+    //    into the WebGL framebuffer by the EffectComposer, textured from the
+    //    scene bundle's `shared.images.SplineWatermark`. CSS and
+    //    MutationObservers therefore cannot touch it; only the render
+    //    pipeline can. (The skill guide's `a[href*="spline.design"]` advice
+    //    describes an older runtime and no longer applies.)
+    //
+    //    The runtime binds the texture via `pipeline.setWatermark(tex)` after
+    //    awaiting the image load, which can resolve AFTER onLoad fires — so
+    //    disabling the pass once is not enough. We also stub out the setter
+    //    so a late call cannot switch it back on.
+    //
+    //    All private internals, hence fully optional-chained: a runtime
+    //    upgrade that renames them should degrade to "badge visible", never
+    //    to a crashed hero.
     // ─────────────────────────────────────────────────────────────────────
-    const killBadge = () => {
-      document.querySelectorAll('a[href*="spline.design"]').forEach(el => el.remove())
+    const pipeline = gl?.pipeline
+    if (pipeline) {
+      pipeline.setWatermark?.(null)          // disables the pass if already bound
+      pipeline.setWatermark = () => {}        // and blocks any later re-binding
+      if (pipeline.logoOverlayPass) pipeline.logoOverlayPass.enabled = false
+      pipeline.updateRenderToScreen?.()
+      splineApp.requestRender?.()            // scene may render on-demand
     }
-    killBadge()
-    // Observe the Spline canvas container specifically (faster than body)
-    const mo = new MutationObserver(killBadge)
-    mo.observe(canvas.parentElement ?? document.body, { childList: true, subtree: true })
-    // Also run a short RAF loop right after load when badge is most likely injected
-    let rafCount = 0
-    const rafLoop = () => {
-      killBadge()
-      if (rafCount++ < 60) requestAnimationFrame(rafLoop) // ~1 second at 60fps
-    }
-    requestAnimationFrame(rafLoop)
 
     return () => {
       canvas.removeEventListener('wheel', onWheel, { capture: true })
       window.removeEventListener('resize', onResize)
-      mo.disconnect()
     }
   }, [])
 
@@ -192,25 +200,6 @@ export default function Hero() {
           height: '120px',
           zIndex: 4,
           background: 'linear-gradient(to bottom, transparent 0%, #D6ECFF 100%)',
-        }}
-        aria-hidden="true"
-      />
-      
-      {/* 
-        ── SPLINE BADGE COVER ──
-        Final fallback cover to absolutely hide the Spline watermark if it somehow 
-        evades CSS and JS removal.
-      */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          right: 0,
-          width: '200px',
-          height: '55px',
-          background: '#D6ECFF',
-          zIndex: 10,
-          pointerEvents: 'none',
         }}
         aria-hidden="true"
       />

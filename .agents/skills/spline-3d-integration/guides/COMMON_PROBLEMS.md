@@ -81,38 +81,43 @@ else showFallback();
 
 **What happens:** A small "Built with Spline" logo appears in the bottom-right corner of the canvas.
 
-**Why:** Spline injects an absolutely-positioned `<a>` element after the canvas. It links to spline.design.
+**Why — this differs by runtime version. Check before reaching for a fix:**
 
-**Fix 1 — MutationObserver (most reliable):**
+| Runtime | Badge is… | Removable by |
+| --- | --- | --- |
+| older builds | an absolutely-positioned `<a href="…spline.design">` after the canvas | DOM / CSS |
+| **`@splinetool/runtime` v1.x (current)** | **a WebGL post-processing pass composited into the canvas framebuffer** | **render pipeline only** |
+
+On v1.x the scene's `publish.settings.web.logo: true` makes the runtime load
+`shared.images.SplineWatermark` and call `pipeline.setWatermark(texture)`, which
+flips on `pipeline.logoOverlayPass`. The EffectComposer then paints it over the
+final frame. **There is no element in the DOM** — `document.querySelectorAll('a')`
+returns nothing matching, there is no shadow root, and no scene object shows up in
+`getAllObjects()`. CSS and MutationObservers are dead code against this version.
+
+**Supported fix — turn it off at the source:**
+Spline editor → Export/Publish settings → toggle the Spline logo off → republish.
+The scene then ships `logo: false` and no watermark pass is ever created. Requires
+a paid Spline plan. This is the only approach that survives runtime upgrades.
+
+**Runtime override (v1.x)** — private internals, so optional-chain everything and
+expect it to break on upgrade. Note the runtime binds the texture *after* awaiting
+the image load, which can resolve **after** `onLoad` fires, so disabling the pass
+once is not enough — stub the setter too:
 ```js
-function killSplineBadge() {
-  document.querySelectorAll('a[href*="spline.design"]').forEach(el => el.remove());
-}
-killSplineBadge();
-const observer = new MutationObserver(killSplineBadge);
-observer.observe(document.body, { childList: true, subtree: true });
-```
-
-**Fix 2 — Cover with a matching-color div:**
-```jsx
-{/* Place inside the Spline wrapper with position:relative */}
-<div style={{
-  position: 'absolute', bottom: 0, right: 0,
-  width: '180px', height: '50px',
-  background: 'YOUR_BG_COLOR',
-  zIndex: 10,
-  pointerEvents: 'none'
-}} />
-```
-
-**Fix 3 — CSS (belt-and-suspenders):**
-```css
-a[href*="spline.design"],
-canvas + a,
-canvas ~ a {
-  display: none !important;
-  visibility: hidden !important;
+const pipeline = (splineApp._renderer ?? splineApp.renderer)?.pipeline
+if (pipeline) {
+  pipeline.setWatermark?.(null)       // disable if already bound
+  pipeline.setWatermark = () => {}     // block late re-binding
+  if (pipeline.logoOverlayPass) pipeline.logoOverlayPass.enabled = false
+  pipeline.updateRenderToScreen?.()
+  splineApp.requestRender?.()          // scene may render on-demand
 }
 ```
+Verify with `pipeline.logoOverlayPass.enabled === false` several seconds after
+load, not just at load. Be aware this overrides a licensing flag — check your
+Spline plan's terms.
 
-**Use all three together** for guaranteed removal regardless of Spline SDK version.
+**Do not cover it with a matching-color div.** The canvas underneath is a
+gradient/3D render, so a flat rectangle never matches and reads as a visible
+patch in the corner.

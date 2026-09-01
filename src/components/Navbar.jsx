@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Menu, X, ArrowUpRight, Sparkles } from 'lucide-react'
+import { Menu, X, ArrowUpRight } from 'lucide-react'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -69,8 +69,8 @@ export default function Navbar() {
                          shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
               style={{ background: 'linear-gradient(135deg, #005498, #0077cc)' }}
             >
-              <Sparkles className="w-4 h-4" />
-              <span>Get Started</span>
+              <ArrowUpRight className="w-4 h-4" />
+              <span>Schedule a Call</span>
             </a>
           </div>
 

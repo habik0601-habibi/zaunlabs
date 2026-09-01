@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Send, Mail, CheckCircle, AlertCircle, PhoneCall, Clock, Globe } from 'lucide-react'
-import { submitContactForm, isSupabaseConfigured } from '../lib/supabaseClient'
+import { submitContactForm } from '../lib/supabaseClient'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -72,12 +72,11 @@ export default function Contact() {
           <div className="lg:col-span-5 space-y-6">
             <div className="glass-card rounded-3xl p-8 border border-blue-200 space-y-6">
 
-              {/* Logo header */}
-              <div className="flex items-center gap-3 pb-4 border-b border-blue-100">
-                <div className="bg-white px-2 py-1 rounded border border-blue-100 flex items-center">
-                  <img src="/logo.png" alt="Zaunlabs" className="h-7 w-auto object-contain" />
-                </div>
-                <span className="text-xs font-mono text-blue-500">Direct Founder Access</span>
+              {/* Header */}
+              <div className="pb-4 border-b border-blue-100">
+                <span className="text-base font-mono font-semibold text-blue-700">
+                  Direct Founder Access
+                </span>
               </div>
 
               <h3 className="text-xl font-bold text-blue-950">Contact Alternatives</h3>
@@ -117,28 +116,16 @@ export default function Contact() {
                   <Clock className="w-4 h-4 text-blue-400 shrink-0" />
                   <span>Response within 24 hours</span>
                 </div>
-                <div className="flex items-center gap-3 text-xs text-blue-700/80">
-                  <Globe className="w-4 h-4 text-emerald-500 shrink-0" />
-                  <span>Serving UTC-8 to UTC+5 time zones</span>
+                <div className="flex items-start gap-3 text-xs text-blue-700/80">
+                  <Globe className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <span>
+                    Call hours 9 AM – 6 PM ET
+                    <span className="text-blue-600/60"> · 6 AM – 3 PM PT · 2 – 11 PM UK</span>
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Supabase status */}
-            <div className="p-4 rounded-2xl glass-card border border-blue-100 flex items-center justify-between text-xs font-mono">
-              <span className="text-blue-500">Database Engine:</span>
-              {isSupabaseConfigured ? (
-                <span className="text-emerald-600 font-bold flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                  Supabase Connected
-                </span>
-              ) : (
-                <span className="text-amber-600 font-bold flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-amber-400"></span>
-                  Demo Mode
-                </span>
-              )}
-            </div>
           </div>
 
           {/* Right: Form */}
@@ -241,10 +228,6 @@ export default function Contact() {
                       <><span>Submit Project Inquiry</span><Send className="w-4 h-4" /></>
                     )}
                   </button>
-
-                  <p className="text-[11px] text-blue-400 text-center font-mono">
-                    Submissions stored securely in Supabase.
-                  </p>
                 </form>
               )}
             </div>

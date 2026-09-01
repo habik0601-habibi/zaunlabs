@@ -1,5 +1,6 @@
 import React from 'react'
-import { Users, Globe2, Terminal, Zap, Sparkles } from 'lucide-react'
+import { Users, Globe2, Terminal, Zap } from 'lucide-react'
+import { ParticleTextEffect } from './ui/interactive-text-particle'
 
 export default function About() {
   const highlights = [
@@ -10,8 +11,8 @@ export default function About() {
       iconBg: 'bg-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white',
     },
     {
-      title: 'Based in Pakistan, Global Reach',
-      description: 'Operating from Pakistan\'s vibrant tech ecosystem, collaborating seamlessly with startups and SMEs across US, Europe, and Asia.',
+      title: 'Remote-First, Global Reach',
+      description: 'Operating remote-first across time zones, collaborating seamlessly with startups and SMEs across the US, Europe, and Asia.',
       icon: Globe2,
       iconBg: 'bg-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white',
     },
@@ -26,7 +27,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="py-20 md:py-28 relative border-t border-blue-100"
+      className="pt-20 md:pt-28 pb-10 md:pb-14 relative border-t border-blue-100"
       style={{ background: 'linear-gradient(180deg, #EAF4FF 0%, #D6ECFF 100%)' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -45,8 +46,8 @@ export default function About() {
             </h2>
 
             <p className="text-blue-800/75 text-base sm:text-lg leading-relaxed">
-              Zaunlabs was founded by a small team of developer-enthusiasts and computer science practitioners
-              based in Pakistan. We got tired of watching businesses get oversold bloated software templates
+              Zaunlabs was founded by a small team of developer-enthusiasts and computer science
+              practitioners. We got tired of watching businesses get oversold bloated software templates
               by agencies with massive overheads.
             </p>
 
@@ -56,16 +57,33 @@ export default function About() {
               every project receives senior-level attention.
             </p>
 
-            <div className="flex flex-wrap gap-3 pt-2">
-              {['📍 Based in Pakistan 🇵🇰', '🌍 Local & Remote Clients', '⚡ 100% Builder Direct'].map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3.5 py-1.5 rounded-xl bg-white/70 border border-blue-200
-                             text-blue-800 text-xs font-medium font-mono"
-                >
-                  {tag}
+            {/* Availability pill */}
+            <div className="pt-2">
+              {/* Same recipe as `.dark-glass` in index.css, dialled more
+                  transparent so the section gradient reads through it. */}
+              <div className="inline-flex items-center gap-4 rounded-full py-2 pl-4 pr-5
+                              border border-[rgba(74,144,217,0.35)]
+                              bg-[rgba(13,40,81,0.6)] backdrop-blur-xl
+                              shadow-[0_8px_28px_-12px_rgba(26,74,138,0.5)]">
+                <span className="flex items-center gap-2.5 text-sm font-bold text-white">
+                  {/* Pulsing status light: a static core under an expanding halo */}
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full
+                                     bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                  </span>
+                  Available for work
                 </span>
-              ))}
+
+                <a
+                  href="#contact"
+                  className="rounded-full text-sm font-medium text-blue-100/80 transition-colors
+                             hover:text-white focus:outline-none
+                             focus-visible:ring-2 focus-visible:ring-emerald-400"
+                >
+                  Get in touch now
+                </a>
+              </div>
             </div>
           </div>
 
@@ -73,18 +91,20 @@ export default function About() {
           <div className="lg:col-span-6 space-y-5">
 
             {/* Brand Showcase */}
-            <div className="glass-card rounded-3xl p-6 border border-blue-200 text-center group">
-              <div className="p-6 rounded-2xl bg-white border border-blue-50 flex flex-col items-center">
-                <img
-                  src="/logo.png"
-                  alt="Zaunlabs Official Logo"
-                  className="max-h-20 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+            <div className="glass-card rounded-3xl p-6 border border-blue-200 text-center">
+              <div className="h-32 md:h-36 rounded-2xl bg-white border border-blue-50 overflow-hidden">
+                <ParticleTextEffect
+                  text="ZAUNLABS"
+                  colors={['005498', '1E6FBF', '4A90D9', '38BDF8', '10B981']}
+                  imageSrc="/logo_icon_blue.png"
+                  imageScale={1.45}
+                  imageGap={0.3}
+                  particleDensity={3}
+                  animationForce={70}
+                  fontScale={0.4}
                 />
               </div>
-              <div className="mt-3 flex items-center justify-center gap-2 text-xs text-blue-500 font-mono">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Zaunlabs — Precision Web & AI Engineering Studio</span>
-              </div>
+              <span className="sr-only">Zaunlabs</span>
             </div>
 
             {/* Highlights */}
