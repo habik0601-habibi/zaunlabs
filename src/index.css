@@ -4,7 +4,10 @@
 
 /* ── Skill fix: override Spline's body overflow injection (COMMON_PROBLEMS.md §1) ── */
 body {
-  overflow: auto !important;
+  /* y only — clamping x below stops any one overflowing element from
+     giving the whole page a sideways scroll on a narrow screen. */
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
 }
 
 /*
@@ -17,6 +20,8 @@ body {
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;   /* stop iOS inflating text in landscape */
   }
 
   /* Global site background matches Spline scene: blue-sky-to-white */
@@ -89,4 +94,28 @@ body {
    ===================================================== */
 .spline-canvas canvas {
   outline: none !important;
+}
+
+/* =====================================================
+   MOBILE
+   Phone-only refinements. Nothing here applies at >=768px,
+   so the desktop rendering is untouched.
+   ===================================================== */
+
+/* 100vh on a phone includes the browser chrome, so a 100vh hero is taller
+   than the visible viewport and jumps as the URL bar hides. svh is the
+   small-viewport unit — guarded by @supports so older engines keep 100vh. */
+@supports (height: 100svh) {
+  @media (max-width: 767px) {
+    #home { height: 100svh !important; }
+  }
+}
+
+@media (max-width: 767px) {
+  /* Large blur radii are expensive to composite on mid-range phones, and the
+     cards sit on flat backgrounds where the difference is barely visible. */
+  .glass-card { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .dark-glass { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+
+  ::-webkit-scrollbar { width: 0; height: 0; }
 }

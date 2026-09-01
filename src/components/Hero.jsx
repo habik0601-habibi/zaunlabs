@@ -28,7 +28,12 @@ export default function Hero() {
     // ─────────────────────────────────────────────────────────────────────
     // 2. RESOLUTION — go through Spline's Three.js renderer properly
     // ─────────────────────────────────────────────────────────────────────
-    const dpr = window.devicePixelRatio || 1
+    const pixelRatio = () =>
+      window.innerWidth < 768
+        ? Math.min(window.devicePixelRatio || 1, 1.5)
+        : (window.devicePixelRatio || 1)
+
+    const dpr = pixelRatio()
     if (typeof splineApp.setSize === 'function') {
       splineApp.setSize(window.innerWidth, window.innerHeight)
     }
@@ -40,7 +45,7 @@ export default function Hero() {
     const onResize = () => {
       const w = window.innerWidth, h = window.innerHeight
       splineApp.setSize?.(w, h)
-      gl?.setPixelRatio?.(window.devicePixelRatio || 1)
+      gl?.setPixelRatio?.(pixelRatio())
       gl?.setSize?.(w, h)
     }
     window.addEventListener('resize', onResize)
@@ -123,10 +128,9 @@ export default function Hero() {
         Solid for first 75% of width, then fades to transparent so cube shows.
       */}
       <div
-        className="absolute inset-y-0 left-0 pointer-events-none"
+        className="absolute inset-y-0 left-0 pointer-events-none w-full md:w-[62%]"
         style={{
           zIndex: 1,
-          width: '62%',
           background: `linear-gradient(to right,
             ${OVERLAY_BG} 0%,
             ${OVERLAY_BG} 75%,
@@ -141,11 +145,11 @@ export default function Hero() {
         className="absolute inset-0 flex items-center"
         style={{ zIndex: 3, pointerEvents: 'none' }}
       >
-        <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          <div className="max-w-[520px]" style={{ paddingTop: '64px' }}>
+        <div className="w-full max-w-7xl mx-auto px-5 sm:px-10 lg:px-16">
+          <div className="max-w-[520px] pt-20 sm:pt-16">
 
             {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-6 rounded-full
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-5 sm:mb-6 rounded-full
                             border border-blue-300/60 bg-white/55 backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full animate-pulse flex-shrink-0"
                     style={{ background: '#005498' }} />

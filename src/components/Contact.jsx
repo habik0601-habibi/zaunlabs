@@ -41,18 +41,18 @@ export default function Contact() {
 
   const inputClass = `w-full px-4 py-3 rounded-xl bg-white border border-blue-200
                       focus:border-blue-500 focus:ring-2 focus:ring-blue-200
-                      text-blue-950 text-sm placeholder-blue-300 outline-none transition-all`
+                      text-blue-950 text-base sm:text-sm placeholder-blue-300 outline-none transition-all`
 
   return (
     <section
       id="contact"
-      className="py-20 md:py-28 relative border-t border-blue-100"
+      className="py-14 sm:py-20 md:py-28 relative border-t border-blue-100"
       style={{ background: 'linear-gradient(180deg, #D6ECFF 0%, #B8D8F8 100%)' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full
                           bg-white/70 border border-blue-200 text-blue-600 text-xs font-mono tracking-wider uppercase">
             <Mail className="w-3.5 h-3.5" /> START A PROJECT
@@ -66,11 +66,11 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-12 items-start">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
           {/* Left: Contact info */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="glass-card rounded-3xl p-8 border border-blue-200 space-y-6">
+            <div className="glass-card rounded-3xl p-5 sm:p-8 border border-blue-200 space-y-6">
 
               {/* Header */}
               <div className="pb-4 border-b border-blue-100">
@@ -130,7 +130,7 @@ export default function Contact() {
 
           {/* Right: Form */}
           <div className="lg:col-span-7">
-            <div className="glass-card rounded-3xl p-8 md:p-10 border border-blue-200 shadow-xl">
+            <div className="glass-card rounded-3xl p-5 sm:p-8 md:p-10 border border-blue-200 shadow-xl">
 
               {status.submitted ? (
                 <div className="py-12 text-center space-y-5">
@@ -163,7 +163,7 @@ export default function Contact() {
                     </div>
                   )}
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                     <div className="space-y-1.5">
                       <label className="text-xs font-mono font-bold text-blue-600 uppercase tracking-wider">
                         Name <span className="text-blue-400">*</span>
@@ -180,7 +180,7 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                     <div className="space-y-1.5">
                       <label className="text-xs font-mono font-bold text-blue-600 uppercase tracking-wider">
                         Company <span className="text-blue-300">(optional)</span>

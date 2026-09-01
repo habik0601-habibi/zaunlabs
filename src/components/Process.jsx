@@ -41,19 +41,19 @@ export default function Process() {
   return (
     <section
       id="process"
-      className="py-24 md:py-32 relative bg-[#f4f9ff]"
+      className="py-16 sm:py-24 md:py-32 relative bg-[#f4f9ff]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <h3 className="text-sm font-bold text-[#005498] tracking-[0.15em] uppercase mb-4">
             How We Work
           </h3>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-[#003366] tracking-tight mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#003366] tracking-tight mb-4 sm:mb-6">
             Our Process
           </h2>
-          <p className="text-lg text-[#004070]/80 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-[#004070]/80 max-w-2xl mx-auto leading-relaxed">
             A methodical, low-risk approach that starts with understanding your business - 
             not jumping straight into tools.
           </p>
@@ -66,7 +66,7 @@ export default function Process() {
             return (
               <div
                 key={step.number}
-                className="group relative bg-white border border-[#D6ECFF] rounded-2xl p-8 
+                className="group relative bg-white border border-[#D6ECFF] rounded-2xl p-6 sm:p-8 
                            shadow-[0_4px_20px_rgba(0,84,152,0.05)] 
                            hover:shadow-[0_20px_40px_rgba(0,84,152,0.15)] hover:border-[#005498]/30 
                            hover:-translate-y-2 transition-all duration-300 ease-out flex flex-col h-full overflow-hidden"
@@ -76,7 +76,7 @@ export default function Process() {
 
                 <div className="relative z-10 flex flex-col h-full">
                   {/* Top: Icon & Number */}
-                  <div className="flex justify-between items-start mb-8">
+                  <div className="flex justify-between items-start mb-6 sm:mb-8">
                     <div className="w-12 h-12 rounded-full border-2 border-[#005498]/30 flex items-center justify-center text-[#005498] 
                                     group-hover:bg-[#005498] group-hover:text-white group-hover:border-[#005498] 
                                     transition-all duration-300 group-hover:scale-110">

@@ -42,7 +42,7 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="py-20 md:py-28 relative border-t border-blue-200/70"
+      className="py-14 sm:py-20 md:py-28 relative border-t border-blue-200/70"
       /* Deliberately a step LIGHTER than the #D6ECFF above it, so the top edge
          reads as a real boundary rather than a continuation. The bottom still
          fades back to #D6ECFF to meet Contact seamlessly. */
@@ -65,7 +65,7 @@ export default function Services() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full
                           border border-blue-200 bg-blue-50 text-blue-600
                           text-[10px] font-mono font-medium tracking-[0.16em] uppercase">
@@ -84,7 +84,7 @@ export default function Services() {
         </div>
 
         {/* Service Cards — twin beam panels, side by side */}
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-10 items-stretch">
           {services.map((service) => {
             const Icon = service.icon
             return (
@@ -100,7 +100,7 @@ export default function Services() {
                 hoverSpeed={240}
                 glow
               >
-                <div className="group flex h-full flex-col justify-between p-8 md:p-10">
+                <div className="group flex h-full flex-col justify-between p-6 sm:p-8 md:p-10">
                   <div>
                     <div className="flex items-center justify-between mb-6">
                       <span className="rounded-full border border-white/15 px-2.5 py-0.5
@@ -113,7 +113,7 @@ export default function Services() {
                       </div>
                     </div>
 
-                    <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-3">
+                    <h3 className="text-xl sm:text-3xl font-extrabold tracking-tight text-white mb-3">
                       {service.title}
                     </h3>
                     <p className="text-sm sm:text-base text-blue-100/70 mb-8 leading-relaxed">

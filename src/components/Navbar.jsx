@@ -20,8 +20,17 @@ export default function Navbar() {
     { name: 'Contact',      href: '#contact' },
   ]
 
+  // A rotation into landscape can cross the md breakpoint while the sheet is
+  // open, leaving it floating over the desktop bar.
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)')
+    const onChange = (e) => { if (e.matches) setMobileMenuOpen(false) }
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
   return (
-    <div className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 md:px-8 pointer-events-none">
+    <div className="fixed top-3 sm:top-4 left-0 right-0 z-50 flex justify-center px-3 sm:px-4 md:px-8 pointer-events-none">
       <header
         className={`relative w-full max-w-5xl transition-all duration-500 rounded-[2rem] border pointer-events-auto ${
           isScrolled
@@ -35,7 +44,7 @@ export default function Navbar() {
             : 'none'
         }}
       >
-        <div className="flex items-center justify-between px-5 py-3">
+        <div className="flex items-center justify-between px-4 sm:px-5 py-2.5 sm:py-3">
           
           {/* ── LOGO ── */}
           <a href="#home" className="flex items-center justify-center group flex-shrink-0 w-32 sm:w-40 h-10 sm:h-12 overflow-hidden">

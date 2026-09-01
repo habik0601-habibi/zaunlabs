@@ -32,9 +32,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Top CTA Bar */}
-        <div className="py-10 border-b border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="py-8 sm:py-10 border-b border-white/10 flex flex-col md:flex-row items-center justify-between gap-5 md:gap-6 text-center md:text-left">
           <div>
-            <h3 className="text-xl md:text-2xl font-extrabold text-white mb-1">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold text-white mb-1">
               Ready to launch with Zaunlabs?
             </h3>
             <p className="text-blue-200/70 text-sm">
@@ -56,7 +56,7 @@ export default function Footer() {
         </div>
 
         {/* Footer Links */}
-        <div className="py-12 grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="py-10 sm:py-12 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-1 space-y-4">
             <div className="flex items-center gap-3">
@@ -70,7 +70,7 @@ export default function Footer() {
                 <div className="text-[10px] font-mono text-blue-400 uppercase tracking-widest">Web & AI Studio</div>
               </div>
             </div>
-            <p className="text-xs text-blue-200/60 leading-relaxed max-w-[200px]">
+            <p className="text-xs text-blue-200/60 leading-relaxed max-w-none md:max-w-[200px]">
               Pakistan's boutique agency for high-performance web apps and AI automation systems.
             </p>
             <a

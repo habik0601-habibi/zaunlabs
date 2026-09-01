@@ -27,14 +27,14 @@ export default function About() {
   return (
     <section
       id="about"
-      className="pt-20 md:pt-28 pb-10 md:pb-14 relative border-t border-blue-100"
+      className="pt-14 sm:pt-20 md:pt-28 pb-10 md:pb-14 relative border-t border-blue-100"
       style={{ background: 'linear-gradient(180deg, #EAF4FF 0%, #D6ECFF 100%)' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
+        <div className="grid lg:grid-cols-12 gap-8 sm:gap-12 items-center">
 
           {/* Left: Narrative */}
-          <div className="lg:col-span-6 space-y-6">
+          <div className="lg:col-span-6 space-y-5 sm:space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full
                             bg-blue-50 border border-blue-200 text-blue-600 text-xs font-mono tracking-wider uppercase">
               <Users className="w-3.5 h-3.5" /> BEHIND ZAUNLABS
@@ -61,7 +61,7 @@ export default function About() {
             <div className="pt-2">
               {/* Same recipe as `.dark-glass` in index.css, dialled more
                   transparent so the section gradient reads through it. */}
-              <div className="inline-flex items-center gap-4 rounded-full py-2 pl-4 pr-5
+              <div className="inline-flex flex-wrap items-center gap-x-4 gap-y-2 rounded-full py-2 pl-4 pr-5
                               border border-[rgba(74,144,217,0.35)]
                               bg-[rgba(13,40,81,0.6)] backdrop-blur-xl
                               shadow-[0_8px_28px_-12px_rgba(26,74,138,0.5)]">
@@ -88,11 +88,11 @@ export default function About() {
           </div>
 
           {/* Right: Logo card + highlights */}
-          <div className="lg:col-span-6 space-y-5">
+          <div className="lg:col-span-6 space-y-4 sm:space-y-5">
 
             {/* Brand Showcase */}
-            <div className="glass-card rounded-3xl p-6 border border-blue-200 text-center">
-              <div className="h-32 md:h-36 rounded-2xl bg-white border border-blue-50 overflow-hidden">
+            <div className="glass-card rounded-3xl p-4 sm:p-6 border border-blue-200 text-center">
+              <div className="h-24 sm:h-32 md:h-36 rounded-2xl bg-white border border-blue-50 overflow-hidden">
                 <ParticleTextEffect
                   text="ZAUNLABS"
                   colors={['005498', '1E6FBF', '4A90D9', '38BDF8', '10B981']}

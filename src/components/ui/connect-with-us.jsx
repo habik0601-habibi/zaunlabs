@@ -101,15 +101,15 @@ export const SocialConnect = () => {
         </div>
 
         {/* Heading */}
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-blue-950 tracking-tight mb-10">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-blue-950 tracking-tight mb-8 sm:mb-10">
           Connect{' '}
           <span className="gradient-text-blue">With Us</span>
         </h2>
 
         {/* Glass icon card */}
         <div
-          className="glass-card rounded-3xl py-12 px-6 sm:px-16 
-            flex flex-wrap items-center justify-center gap-10 sm:gap-16
+          className="glass-card rounded-3xl py-8 px-4 sm:py-12 sm:px-16 
+            flex flex-wrap items-center justify-center gap-8 sm:gap-16
             border border-blue-200/60"
           style={{
             background: 'rgba(255,255,255,0.52)',
@@ -146,7 +146,7 @@ export const SocialConnect = () => {
                     border: '1.5px solid rgba(74,144,217,0.25)',
                     color: '#1A4A8A',
                   }}
-                  className="w-20 h-20 rounded-full flex items-center justify-center transition-colors duration-300"
+                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center transition-colors duration-300"
                 >
                   <motion.div
                     variants={shakeVariants}
@@ -159,7 +159,7 @@ export const SocialConnect = () => {
 
                 {/* Label */}
                 <span
-                  className="mt-4 text-sm font-bold tracking-wide transition-colors duration-300"
+                  className="mt-3 sm:mt-4 text-xs sm:text-sm font-bold tracking-wide transition-colors duration-300"
                   style={{ color: isHovered ? '#003366' : '#4A7BAA' }}
                 >
                   {platform.name}

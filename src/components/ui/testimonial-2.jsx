@@ -15,10 +15,10 @@ const imagePositions = [
   { bottom: '15%', left: '30%', className: 'hidden md:block w-16 h-16' }, // pushed left from 45%
   { bottom: '10%', right: '20%', className: 'hidden md:block w-24 h-24' }, // pushed right from 30%
   { bottom: '2%', right: '15%', className: 'hidden lg:block w-20 h-20' },
-  { top: '10%', left: '5%', className: 'block md:hidden w-16 h-16' },
-  { top: '5%', right: '10%', className: 'block md:hidden w-20 h-20' },
-  { bottom: '5%', left: '10%', className: 'block md:hidden w-20 h-20' },
-  { bottom: '10%', right: '5%', className: 'block md:hidden w-16 h-16' },
+  { top: '2%', left: '1%', className: 'block md:hidden w-14 h-14' },
+  { top: '1%', right: '1%', className: 'block md:hidden w-16 h-16' },
+  { bottom: '1%', left: '1%', className: 'block md:hidden w-16 h-16' },
+  { bottom: '2%', right: '1%', className: 'block md:hidden w-14 h-14' },
 ];
 
 const imageVariants = {
@@ -57,7 +57,7 @@ export const AnimatedTestimonialGrid = ({
   return (
     <section
       className={cn(
-        'relative w-full max-w-7xl mx-auto py-32 sm:py-40 px-4',
+        'relative w-full max-w-7xl mx-auto py-20 sm:py-40 px-4',
         className
       )}
     >
@@ -96,16 +96,16 @@ export const AnimatedTestimonialGrid = ({
             {badgeText}
           </div>
         )}
-        <h2 className="text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-[#003366] mb-6 max-w-3xl leading-[1.1]">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-[#003366] mb-5 sm:mb-6 max-w-3xl leading-[1.1]">
           {title}
         </h2>
-        <p className="max-w-2xl text-lg text-[#004070]/80 mb-10 leading-relaxed font-medium">
+        <p className="max-w-2xl text-base sm:text-lg text-[#004070]/80 mb-8 sm:mb-10 leading-relaxed font-medium">
           {description}
         </p>
         
         <a
           href={ctaHref}
-          className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#005498] to-[#0077cc] px-8 py-4 text-base font-bold text-white shadow-lg transition-transform hover:scale-[1.02] active:scale-[0.98]"
+          className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#005498] to-[#0077cc] px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-white shadow-lg transition-transform hover:scale-[1.02] active:scale-[0.98]"
         >
           {ctaText}
           <ArrowRight className="ml-2 h-5 w-5" />
