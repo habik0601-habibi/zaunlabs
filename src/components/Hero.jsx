@@ -25,6 +25,18 @@ export default function Hero() {
     }
     canvas.addEventListener('wheel', onWheel, { passive: true, capture: true })
 
+    // `wheel` never fires on a phone. Spline's orbit controls consume the
+    // touch stream instead, so a vertical drag rotated the camera rather than
+    // scrolling the page — the hero became a scroll trap. Same trick as above:
+    // capture first, stop Spline's handlers from ever seeing the event. These
+    // are passive, so they cannot themselves block the browser's scroll.
+    const onTouch = (e) => {
+      e.stopImmediatePropagation()
+    }
+    for (const type of ['touchstart', 'touchmove', 'pointerdown', 'pointermove']) {
+      canvas.addEventListener(type, onTouch, { passive: true, capture: true })
+    }
+
     // ─────────────────────────────────────────────────────────────────────
     // 2. RESOLUTION — go through Spline's Three.js renderer properly
     // ─────────────────────────────────────────────────────────────────────
@@ -81,6 +93,9 @@ export default function Hero() {
 
     return () => {
       canvas.removeEventListener('wheel', onWheel, { capture: true })
+      for (const type of ['touchstart', 'touchmove', 'pointerdown', 'pointermove']) {
+        canvas.removeEventListener(type, onTouch, { capture: true })
+      }
       window.removeEventListener('resize', onResize)
     }
   }, [])
@@ -93,7 +108,7 @@ export default function Hero() {
     >
 
       {/* ── SPLINE SCENE ── */}
-      <div className="absolute inset-0 w-full h-full" style={{ zIndex: 0 }}>
+      <div className="spline-layer absolute inset-0 w-full h-full" style={{ zIndex: 0 }}>
         <Suspense
           fallback={
             <div style={{

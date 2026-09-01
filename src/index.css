@@ -96,6 +96,24 @@ body {
   outline: none !important;
 }
 
+/* Spline's orbit controls call preventDefault on touchmove, which cancels the
+   page scroll. Declaring the canvas pan-y hands vertical drags to the browser
+   before any handler can claim them. */
+#home canvas {
+  touch-action: pan-y !important;
+}
+
+/* Belt and braces: on any touch device the hero scene is purely decorative,
+   so it stops hit-testing entirely and every drag lands on the page. Mouse
+   users keep the interactive scene — `hover: hover` excludes this rule. */
+@media (hover: none) {
+  .spline-layer,
+  .spline-layer canvas {
+    pointer-events: none !important;
+    touch-action: pan-y !important;
+  }
+}
+
 /* =====================================================
    MOBILE
    Phone-only refinements. Nothing here applies at >=768px,
