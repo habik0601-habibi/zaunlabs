@@ -1,11 +1,26 @@
-import React, { Suspense, lazy, useCallback } from 'react'
+import React, { Suspense, lazy, useCallback, useEffect, useState } from 'react'
 
 const Spline = lazy(() => import('@splinetool/react-spline'))
 
 const SCENE_BG   = '#C8E5F8'
 const OVERLAY_BG = '#CAE6F9'
+const SCENE_URL  = 'https://prod.spline.design/hRW5fb7fi5dByJ9T/scene.splinecode'
+const MOBILE_BREAKPOINT = 768 // matches Tailwind's `md`
 
 export default function Hero() {
+  // Cubes are a heavy WebGL scene that never worked well as a touch surface
+  // (fighting page scroll, no real drag affordance) — skip loading it on
+  // mobile entirely rather than fight those interactions.
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT
+  )
+
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`)
+    const onChange = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
 
   const handleLoad = useCallback((splineApp) => {
     if (!splineApp) return
@@ -30,7 +45,15 @@ export default function Hero() {
     // scrolling the page — the hero became a scroll trap. Same trick as above:
     // capture first, stop Spline's handlers from ever seeing the event. These
     // are passive, so they cannot themselves block the browser's scroll.
+    //
+    // Only touch-originated pointer events are blocked here — pointerdown/
+    // pointermove also fire for mouse input, and blocking those unconditionally
+    // silently kills mouse-drag interaction with the scene (cubes stop being
+    // draggable, though the idle spin animation keeps playing).
     const onTouch = (e) => {
+      if (e.type === 'pointerdown' || e.type === 'pointermove') {
+        if (e.pointerType !== 'touch') return
+      }
       e.stopImmediatePropagation()
     }
     for (const type of ['touchstart', 'touchmove', 'pointerdown', 'pointermove']) {
@@ -107,22 +130,29 @@ export default function Hero() {
       style={{ height: '100vh', background: SCENE_BG }}
     >
 
-      {/* ── SPLINE SCENE ── */}
+      {/* ── SPLINE SCENE (desktop/tablet only — see isMobile above) ── */}
       <div className="spline-layer absolute inset-0 w-full h-full" style={{ zIndex: 0 }}>
-        <Suspense
-          fallback={
-            <div style={{
-              width: '100%', height: '100%',
-              background: `linear-gradient(180deg, #B8D8F8 0%, ${SCENE_BG} 50%, #fff 100%)`,
-            }} />
-          }
-        >
-          <Spline
-            scene="https://prod.spline.design/pCom4TnmiY3FXRVH/scene.splinecode"
-            onLoad={handleLoad}
-            style={{ width: '100%', height: '100%' }}
-          />
-        </Suspense>
+        {isMobile ? (
+          <div style={{
+            width: '100%', height: '100%',
+            background: `linear-gradient(180deg, #B8D8F8 0%, ${SCENE_BG} 50%, #fff 100%)`,
+          }} />
+        ) : (
+          <Suspense
+            fallback={
+              <div style={{
+                width: '100%', height: '100%',
+                background: `linear-gradient(180deg, #B8D8F8 0%, ${SCENE_BG} 50%, #fff 100%)`,
+              }} />
+            }
+          >
+            <Spline
+              scene={SCENE_URL}
+              onLoad={handleLoad}
+              style={{ width: '100%', height: '100%' }}
+            />
+          </Suspense>
+        )}
       </div>
 
       {/*
